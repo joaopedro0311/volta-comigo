@@ -1,68 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>volta cmg bb</title>
-    <style>
-        body{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        a{
-            text-decoration: none;
-        }
-        .box {
-            font-size: 20px;
-            color: white;
-            height: 250px;
-            width: 350px;
-            border-radius: 10px;
-            background: #191919;
-            flex-direction: column;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .buttons-container {
-            display: flex;
-            justify-content: space-around;
-            height: 50px;
-            width: 150px;
-        }
-        button {
-            height: 30px;
-            width: 50px;
-            background: white;
-            border-radius: 5px;
-            color: blue;
-            font-weight: 600;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>volta cmg?</title>
+<style>
+  :root{
+    --rose-deep:#7a1f3d;
+    --rose:#c23b6b;
+    --rose-light:#ff8fab;
+    --cream:#fff1f4;
+    --gold:#e8b4bc;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;margin:0;}
+  body{
+    font-family: Georgia, 'Times New Roman', serif;
+    background: radial-gradient(circle at 30% 20%, var(--rose-light) 0%, var(--rose) 45%, var(--rose-deep) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    position:relative;
+    color: var(--cream);
+  }
+  .heart{
+    position:absolute;
+    opacity:0.35;
+    animation: float 9s ease-in-out infinite;
+    user-select:none;
+    pointer-events:none;
+  }
+  @keyframes float{
+    0%,100%{ transform: translateY(0) rotate(0deg); }
+    50%{ transform: translateY(-25px) rotate(8deg); }
+  }
+  .card{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding: 2.5rem 2rem;
+    max-width: 420px;
+    width: 90%;
+  }
+  h1{
+    font-size: clamp(1.8rem, 6vw, 2.6rem);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin: 0 0 2.2rem;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .buttons{
+    position: relative;
+    height: 70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 1.2rem;
+  }
+  button{
+    font-family: inherit;
+    font-size: 1.05rem;
+    padding: 0.85rem 2.1rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+  }
+  #sim{
+    background: var(--cream);
+    color: var(--rose-deep);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  }
+  #sim:hover{ transform: scale(1.06); }
+  #nao{
+    background: transparent;
+    color: var(--cream);
+    border: 1.5px solid rgba(255,255,255,0.7);
+    position: absolute;
+  }
+  #resultado{
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    min-height: 2rem;
+  }
+  .sub{
+    font-size: 0.95rem;
+    opacity: 0.85;
+    margin-top: -1.4rem;
+    margin-bottom: 2rem;
+  }
+</style>
 </head>
 <body>
-    <div class="box">
-        <p>volta comigo ?</p>
-        <div class="buttons-container">
-            <button>
-                <a href="https://link.com">sim</a>
-            </button>
-            <button id="no">não</button>
-        </div>
-    </div>
-</body>
-<script>
-    let button = document.getElementById('no');
-    let height = window.innerHeight - 50;
-    let widght = window.innerWidth - 50;
 
-    button.addEventListener('mouseover', function() {
-        button.style.position = "absolute";
-        button.style.top = Math.random() * height + "px";
-        button.style.left = Math.random() * width + "px";
+<div class="card">
+  <h1>volta cmg?</h1>
+  <div class="buttons">
+    <button id="sim">sim</button>
+    <button id="nao">não</button>
+  </div>
+  <div id="resultado"></div>
+</div>
+
+<script>
+  // corações flutuando no fundo
+  const emojis = ['♥','❤','♡'];
+  for(let i=0;i<18;i++){
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    h.style.left = Math.random()*100+'vw';
+    h.style.top = Math.random()*100+'vh';
+    h.style.fontSize = (14+Math.random()*26)+'px';
+    h.style.animationDelay = (Math.random()*6)+'s';
+    h.style.animationDuration = (7+Math.random()*5)+'s';
+    document.body.appendChild(h);
+  }
+
+  const nao = document.getElementById('nao');
+  const sim = document.getElementById('sim');
+  const container = document.querySelector('.buttons');
+  const resultado = document.getElementById('resultado');
+  let tentativas = 0;
+
+  const frases = [
+    'tenta de novo 🥺',
+    'quase!',
+    'não foge não...',
+    'só falta clicar em sim',
+    'tá difícil, hein'
+  ];
+
+  function fugir(){
+    const rect = container.getBoundingClientRect();
+    const btnW = nao.offsetWidth;
+    const btnH = nao.offsetHeight;
+    const maxX = rect.width - btnW;
+    const maxY = 140;
+    const x = Math.random()*maxX - rect.width/2 + btnW/2;
+    const y = Math.random()*maxY - maxY/2;
+    nao.style.transform = `translate(${x}px, ${y}px)`;
+    tentativas++;
+    if(tentativas <= frases.length){
+      resultado.textContent = frases[Math.min(tentativas-1, frases.length-1)];
     }
-)
+  }
+
+  nao.addEventListener('mouseenter', fugir);
+  nao.addEventListener('click', fugir);
+  nao.addEventListener('touchstart', function(e){ e.preventDefault(); fugir(); }, {passive:false});
+
+  sim.addEventListener('click', () => {
+    resultado.textContent = 'ebaaa 🥹❤ , obrigada por voltar';
+    nao.style.display = 'none';
+  });
 </script>
+
+</body>
 </html>
